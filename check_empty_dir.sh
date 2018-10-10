@@ -13,5 +13,3 @@ else
     echo "Not empty"
 fi
 }
-
-check_empty "/home/pi/script"

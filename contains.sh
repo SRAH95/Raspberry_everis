@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#El Path que se da en la linea 7 debe ser el del fichero "datos"
 #$2=$(/home/pi/Script/Raspberry_everis/datos)
 
 contains() {
