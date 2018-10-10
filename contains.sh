@@ -1,10 +1,11 @@
 #!/bin/bash
 
-contains() {
-    if [[ "$a" =~ $(echo ^\($(paste -sd'|' /home/rodrigo/Script/datos)\)$)  ]]; then
-        echo "hola"
-    else 
-        echo "adios"
-    fi
+#$2=$(/home/pi/Script/Raspberry_everis/datos)
 
+contains() {
+    if [[ "$1" =~ $(echo ^\($(paste -sd'|' /home/pi/Script/Raspberry_everis/datos)\)$)  ]]; then
+        b=0
+    else
+        b=1
+    fi
 }
