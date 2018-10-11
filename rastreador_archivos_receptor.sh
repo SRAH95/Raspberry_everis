@@ -19,7 +19,7 @@ rastreador()
     path_rasppi=$1                              #"Path" de donde estan los nombres de los archivos en la Raspberry pi.
     path_receptor=$2                            #"Path" de donde estan los nombres de los archivos en el Receptor.
     
-    for j in ${path_receptor[*]}; do            #El archivo datos contiene la lista de los archivos contenidos            
+    for j in $path_receptor; do                 #El archivo datos contiene la lista de los archivos contenidos            
         $j >> datos                             #en Dropbox o en el receptor.
     done                                        #El archivo datos estara en el mismo directorio que este Script.
 
