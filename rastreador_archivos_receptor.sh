@@ -20,7 +20,7 @@ rastreador()
     path_receptor=$2                            #"Path" de donde estan los nombres de los archivos en el Receptor.
     
     for j in $path_receptor; do                 #El archivo datos contiene la lista de los archivos contenidos            
-        $j >> datos                             #en Dropbox o en el receptor.
+        echo $j >> datos                        #en Dropbox o en el receptor.
     done                                        #El archivo datos estara en el mismo directorio que este Script.
 
     for j in $(ls $path_rasppi); do
