@@ -43,3 +43,5 @@ rastreador()
 
     rm datos
 }
+
+rastreador "/home/pi/Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/" "curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/ | awk '{print $9}'"
