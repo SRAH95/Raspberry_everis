@@ -6,7 +6,11 @@
 
 upload_dropbox()
 {
-    mv $1 /home/pi/Dropbox-Uploader/script_upload_dropbox/ && cd /home/pi/Dropbox-Uploader
-    ./dropbox_uploader.sh -q upload script_upload_dropbox/* $2
-    cd script_upload_dropbox/ && rm *
+     mv $1 /home/pi/Dropbox-Uploader/Script_upload_dropbox/ && cd /home/pi/Dropbox-Uploader/
+    ./dropbox_uploader.sh -q upload Script_upload_dropbox/* $2
+    cd Script_upload_dropbox/ && rm *
 }
+
+#Un ejemplo de como se debe ejecutar la funcion, prestar atencion de como es el formato de los argumentos.
+
+#upload_dropbox "/home/pi/prueba.txt" "Septentrio_data/"

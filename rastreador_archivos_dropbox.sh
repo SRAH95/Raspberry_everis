@@ -8,6 +8,7 @@
 
 rastreador()
 {
+    . upload_dropbox.sh
     . contains.sh                               #Me devolvera una b=0 si el item se encuentra en la lista y b=1 si no.
 
     path_rasppi=$1                              #"Path" de donde estan los nombres de los archivos en la Raspberry pi.
@@ -20,15 +21,16 @@ rastreador()
         arr_dropbox_dir+=("$i")
     done
 
-    for ((j=1; j<${#arr_dropbox_dir[@]}; j+=2)); do
-        for z in $path_dropbox/$j; do                   #El archivo datos contiene la lista de los archivos contenidos
-            echo $z >> datos                            #en Dropbox o en el receptor.
-        done                                            #El archivo datos estara en el mismo directorio que este Script.
+    for ((j=1; j<${#arr_dropbox_dir[@]}; j+=2)); do     #El archivo datos contiene la lista de los archivos contenidos
+        echo $path_dropbox/$j >> datos                  #en Dropbox o en el receptor.
+    done                                                #El archivo datos estara en el mismo directorio que este Script.
+                                                        
+    for z in $(ls $path_rasppi); do
+        contains $path_rasppi/$z 
+        if [ "b"=="1" ]; then
+            upload_dropbox "$path_rasppi/$z/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$z/" 
+        fi
     done
 
-    for k in $path_rasppi; do
-        contains $k 
-        if [ "b"=="1" ]; then
-            #comando de subida.
-    done
+    rm datos
 }
