@@ -26,9 +26,9 @@ rastreador()
     done                                                #El archivo datos estara en el mismo directorio que este Script.
                                                         
     for z in $(ls $path_rasppi); do
-        contains $path_rasppi/$z 
+        contains $path_rasppi$z 
         if [ "b"=="1" ]; then
-            upload_dropbox "$path_rasppi/$z/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$z/" 
+            upload_dropbox "$path_rasppi$z/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$z/" 
         fi
     done
 
