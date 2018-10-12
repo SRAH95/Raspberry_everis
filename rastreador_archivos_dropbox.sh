@@ -22,15 +22,18 @@ rastreador()
     done
 
     for ((j=1; j<${#arr_dropbox_dir[@]}; j+=2)); do     #El archivo datos contiene la lista de los archivos contenidos
-        echo $path_dropbox/$j >> datos                  #en Dropbox o en el receptor.
+        echo $path_dropbox/$j >> data_names             #en Dropbox o en el receptor.
     done                                                #El archivo datos estara en el mismo directorio que este Script.
                                                         
     for z in $(ls $path_rasppi); do
-        contains $path_rasppi$z 
+        file=$(ls $path_rasppi$z/*)
+        month=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$z/ | awk '{print $6}' | tail -n 1)
+        day=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$z/ | awk '{print $7}' | tail -n 1)
+        contains "$month_$day_$file" 
         if [ "b"=="1" ]; then
-            upload_dropbox "$path_rasppi$z/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$z/" 
+            upload_dropbox "$path_rasppi$z/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$month_$day_$z/$month_$day_$file" 
         fi
     done
 
-    rm datos
+    rm data_names
 }

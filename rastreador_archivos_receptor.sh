@@ -16,7 +16,7 @@ rastreador()
     path_receptor=$2                            #"Path" de donde estan los nombres de los archivos en el Receptor.
     
     for i in $(ls $path_rasppi); do             #El archivo datos contiene la lista de los archivos contenidos                    
-        echo $i >> datos                        #en Dropbox o en el receptor.
+        echo $i >> data_names                   #en Dropbox o en el receptor.
         check_empty "$path_rasppi$i"            #El archivo datos estara en el mismo directorio que este Script.                     
         if [ "d"=="0"]; then                    
             file=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$i/ | awk '{print $9}' | tail -n 1)
@@ -44,7 +44,7 @@ rastreador()
         fi
     done
 
-    rm datos
+    rm data_names
 }
 
 rastreador "/home/pi/Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/" "$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/ | awk '{print $9}')"
