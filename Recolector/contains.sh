@@ -6,7 +6,7 @@
 declare -i b
 
 contains() {
-    if [[ "$1" =~ $(echo ^\($(paste -sd'|' /home/pi/Script/Raspberry_everis/datos)\)$)  ]]; then
+    if [[ "$1" =~ $(echo ^\($(paste -sd'|' /home/pi/Scripts/Recolector/data_names)\)$)  ]]; then
         b=0
     else
         b=1
