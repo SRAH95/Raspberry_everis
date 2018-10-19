@@ -10,7 +10,7 @@ rastreador_receptor()
 {
     . check_empty_dir.sh                       					 #Me devolvera una d=0 si el directorio esta vacio y d=1 si no.
     . contains.sh                              					 #Me devolvera una b=0 si el item se encuentra en la lista y b=1 si no.
-    . upload_dropbox.sh                        					 #Subira los archivos a Dropbox.
+    #. upload_dropbox.sh                        					 #Subira los archivos a Dropbox.
 
     path_rasppi=$1                             					 #"Path" de donde estan los nombres de los archivos en la Raspberry pi.
     path_receptor=$2                           					 #"Path" de donde estan los nombres de los archivos en el Receptor.
@@ -19,22 +19,22 @@ rastreador_receptor()
         echo $i >> /home/pi/Scripts/Recolector/data_names                   	 #en Dropbox o en el receptor.
         check_empty "$path_rasppi$i"           					 #El archivo datos estara en el mismo directorio que este Script.
 	if (("$d"=="0")); then
-	    name=$(curl ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$i/ | awk '{print $6 $7 $9}' | tail -n 1)
-            file=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$i/ | awk '{print $9}' | tail -n 1)
-            wget -m ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$i/$file -P /home/pi/Septentrio_data/
+	    name=$(curl ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$i/ | awk '{print $6 $7 $9}' | tail -n 1)
+            file=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$i/ | awk '{print $9}' | tail -n 1)
+            wget -m ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$i/$file -P /home/pi/Septentrio_data/
             mv $path_rasppi$i/* $path_rasppi$i/$name
-            upload_dropbox "$path_rasppi$i/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/"
+            #upload_dropbox "$path_rasppi$i/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/"
         fi
     done
 
     for j in $path_receptor; do
         contains $j
         if (("$b"=="1")); then
-	    name=$(curl ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$j/ | awk '{print $6 $7 $9}' | tail -n 1)
-            file=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$j/ | awk '{print $9}' | tail -n 1)
-            wget -m ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/$j/$file -P /home/pi/Septentrio_data/
+	    name=$(curl ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$j/ | awk '{print $6 $7 $9}' | tail -n 1)
+            file=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$j/ | awk '{print $9}' | tail -n 1)
+            wget -m ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$j/$file -P /home/pi/Septentrio_data/
  	    mv $path_rasppi$j/* $path_rasppi$j/$name
-            upload_dropbox "$path_rasppi$j/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_prueba_RINEX_24H/"
+            #upload_dropbox "$path_rasppi$j/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/"
         fi
     done
 

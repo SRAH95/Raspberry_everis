@@ -1,5 +1,7 @@
 #! /bin/bash
 
+sleep 35
+
 cd /home/pi/Scripts/Recolector/
 
 . rastreador_archivos_receptor.sh
