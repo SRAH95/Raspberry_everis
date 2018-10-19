@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sleep 7
-
 cd /home/pi/
 
 dia=$(date | awk '{print $1}')

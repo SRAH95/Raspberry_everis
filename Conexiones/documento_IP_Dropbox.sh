@@ -1,7 +1,7 @@
 #!/bin/bash
 
 date=$(date)
-wlan0_local=$(hostname -I)
+wlan0_local=$(hostname -I | awk '{print $2}')
 wlan0_publica=$(curl ifconfig.me)
 
 echo Este documento fue generado el $date
