@@ -19,10 +19,11 @@ rastreador_receptor()
         echo $i >> /home/pi/Scripts/Recolector/data_names                   	 #en Dropbox o en el receptor.
         check_empty "$path_rasppi$i"           					 #El archivo datos estara en el mismo directorio que este Script.
 	if (("$d"=="0")); then
-	    name=$(curl ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$i/ | awk '{print $6 $7 $9}' | tail -n 1)
-            file=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$i/ | awk '{print $9}' | tail -n 1)
+	    name=$(curl ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$i/ | awk '{print $6 $7 $9}' | head -n 1)
+            file=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$i/ | awk '{print $9}' | head -n 1)
             wget -m ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$i/$file -P /home/pi/Septentrio_data/
             mv $path_rasppi$i/* $path_rasppi$i/$name
+	    xz -9 $path_rasppi$i/$name
             #upload_dropbox "$path_rasppi$i/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/"
         fi
     done
@@ -30,10 +31,11 @@ rastreador_receptor()
     for j in $path_receptor; do
         contains $j
         if (("$b"=="1")); then
-	    name=$(curl ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$j/ | awk '{print $6 $7 $9}' | tail -n 1)
-            file=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$j/ | awk '{print $9}' | tail -n 1)
+	    name=$(curl ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$j/ | awk '{print $6 $7 $9}' | head -n 1)
+            file=$(curl -s ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$j/ | awk '{print $9}' | head -n 1)
             wget -m ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$j/$file -P /home/pi/Septentrio_data/
- 	    mv $path_rasppi$j/* $path_rasppi$j/$name
+	    mv $path_rasppi$j/* $path_rasppi$j/$name
+	    xz -9 $path_rasppi$j/$name
             #upload_dropbox "$path_rasppi$j/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/"
         fi
     done
