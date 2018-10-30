@@ -21,7 +21,7 @@
 # 
 # m h  dom mon dow   command
 @reboot sh /home/pi/run_after_boot.sh
-@reboot sh /home/pi/Scripts/Conexiones/raspberry_address.sh
-#@reboot bash /home/pi/Scripts/Recolector/main_recolector_datos_reinicio.sh >> /home/pi/log/myscript_reboot.log 2>&1
-#@hourly  bash /home/pi/Scripts/Recolector/main_recolector_datos.sh >> /home/pi/log/myscript.log 2>&1
-
+@reboot bash /home/pi/Scripts/Conexiones/upload_LOG_report_reinicio.sh
+@reboot bash /home/pi/Scripts/Recolector/main_recolector_datos_reinicio.sh >> /home/pi/log/myscript_reboot.log 2>&1
+@hourly bash /home/pi/Scripts/Recolector/main_recolector_datos.sh >> /home/pi/log/myscript.log 2>&1
+*/5 * * * * bash /home/pi/Scripts/Conexiones/upload_LOG_report.sh
