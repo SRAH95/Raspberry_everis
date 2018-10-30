@@ -10,7 +10,7 @@ rastreador_receptor()
 {
     . check_empty_dir.sh                       					 #Me devolvera una d=0 si el directorio esta vacio y d=1 si no.
     . contains.sh                              					 #Me devolvera una b=0 si el item se encuentra en la lista y b=1 si no.
-    #. upload_dropbox.sh                        					 #Subira los archivos a Dropbox.
+                                            					 #Subira los archivos a Dropbox.
 
     path_rasppi=$1                             					 #"Path" de donde estan los nombres de los archivos en la Raspberry pi.
     path_receptor=$2                           					 #"Path" de donde estan los nombres de los archivos en el Receptor.
@@ -24,7 +24,6 @@ rastreador_receptor()
             wget -m ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$i/$file -P /home/pi/Septentrio_data/
             mv $path_rasppi$i/* $path_rasppi$i/$name
 	    xz -9 $path_rasppi$i/$name
-            #upload_dropbox "$path_rasppi$i/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/"
         fi
     done
 
@@ -36,7 +35,6 @@ rastreador_receptor()
             wget -m ftp://everis:IFEGSA@192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/$j/$file -P /home/pi/Septentrio_data/
 	    mv $path_rasppi$j/* $path_rasppi$j/$name
 	    xz -9 $path_rasppi$j/$name
-            #upload_dropbox "$path_rasppi$j/*" "Septentrio_data/192.168.3.1/DSK1/SSN/LOG1_everis_GSA_RINEX_24H/"
         fi
     done
 
